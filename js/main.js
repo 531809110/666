@@ -73,9 +73,11 @@ function gameloop() {
     //4.5:绘制背景图片
     drawbgImage();
     //4.6:绘制海藻
-    ane.draw()
+    ane.draw();
     //4.7:绘制食物
-    food.game()
+    food.game();
+    //4.8:绘制大鱼
+    mom.game();
 };
 // 5:网页加载成功后调用game
 document.body.onload = game;

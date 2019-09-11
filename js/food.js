@@ -67,7 +67,7 @@ foodObj.prototype.draw = function () {
             //4.7：绘制当前食物
             ctx1.drawImage(pic, this.x[i], this.y[i], this.l[i], this.l[i]);
             //4.8~4.9:如果当前食物漂出屏幕，将食物状态改为隐藏
-            if(this.y[i]<10 ||  this.l[i]>14){this.alive[i]=false;}
+            if(this.y[i]<10 || this.l[i]>14){this.alive[i]=false;}
         }       
     }
 }

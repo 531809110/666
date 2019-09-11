@@ -21,6 +21,8 @@ var bgimg;
 var ane;
 // 1.7:创建全局变量，保存食物对象
 var food;
+// 1.8:创建全局变量，保存大鱼对象
+var mom;
 
 // 2：创建函数game
 function game() {
@@ -54,6 +56,9 @@ function init() {
     //3.8:初始化食物对象
     food = new foodObj();
     food.init();
+     //3.9:初始化大鱼对象
+     mom = new momObj();
+     mom.init();
 };
 // 4.创建函数gameloop
 function gameloop() {

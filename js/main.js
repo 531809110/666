@@ -23,6 +23,13 @@ var ane;
 var food;
 // 1.8:创建全局变量，保存大鱼对象
 var mom;
+// 1.9:创建全局变量，保存鼠标位置
+var mx=0;
+var my=0;
+// 1.10:创建全局变量，显示分数
+var data;
+// 1.11:创建全局变量，显示光环
+var wave;
 
 // 2：创建函数game
 function game() {
@@ -34,7 +41,7 @@ function init() {
     // 3.1:初始化两个画布对象
     can1 = document.getElementById("canvas1");
     can2 = document.getElementById("canvas2");
-    console.log(can1, can2);
+    // console.log(can1, can2);
     // 3.2：初始化两个画笔对象
     ctx1 = can1.getContext("2d");
     ctx2 = can2.getContext("2d");
@@ -59,6 +66,13 @@ function init() {
      //3.9:初始化大鱼对象
      mom = new momObj();
      mom.init();
+    //  3.11:为画布2绑定鼠标移动事件
+    can2.addEventListener("mousemove",handleMove);
+    // 3.12:初始化分数
+    data=new dataObj();
+     // 3.13:创建光环对象，初始化光环
+     wave=new waveObj();
+     wave.init();
 };
 // 4.创建函数gameloop
 function gameloop() {
@@ -78,6 +92,23 @@ function gameloop() {
     food.game();
     //4.8:绘制大鱼
     mom.game();
+    //4.9:大鱼吃食物
+    momFoodCollison();
+     //4.10:显示分数
+     data.draw();
+     //4.11:显示光环
+     wave.draw();
 };
 // 5:网页加载成功后调用game
 document.body.onload = game;
+//6.处理鼠标移动事件handleMove
+function handleMove(event){
+mx=event.offsetX;
+my=event.offsetY;
+
+//以下代码可直接修改大鱼的坐标，但不满足低耦合，高内聚原则，应该让大鱼自己去改变自己的内容，
+//而不是在其它板块内改变大鱼的坐标
+// mom.x=event.offsetX;
+// mom.y=event.offsetY;
+// console.log(mom)
+}

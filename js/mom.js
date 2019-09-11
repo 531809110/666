@@ -3,8 +3,8 @@
 // 1:创建大鱼构造函数momObj
 function momObj() {
     // 1.1:大鱼位置x,y
-    this.x;
-    this.y;
+    this.x=0;
+    this.y=0;
     // 1.2:大鱼游动角度
     this.angle;
     // 1.3：创建数组保存大鱼眼睛
@@ -87,10 +87,20 @@ momObj.prototype.draw = function () {
         // console.log(this.bigBodyIndex)
         this.bigBodyStart = 0;
     }
+    // 3.0.3:(1)将鼠标位置赋值给大鱼
+    this.x=lerpDistance(mx,this.x,0.90);
+    this.y=lerpDistance(my,this.y,0.90);
+    //3.0.4:计算大鱼与鼠标之间坐标差
+    var deltaY=my-this.y;
+    var deltaX=mx-this.x;
+    //(2)计算大鱼与鼠标之间的角度差
+    var beta=Math.atan2(deltaY,deltaX)+Math.PI
+    //(3)让大鱼与鼠标的角度差慢慢变小
+    this.angle=lerpAngle(beta,this.angle,0.9);
     // 3.1:保存画笔2状态
     ctx2.save();
     // 3.2：将画布原点行动到大鱼身上中心
-    ctx2.translate(canWidth * 0.5, canHeight * 0.5);
+    ctx2.translate(this.x, this.y);
     // 3.3：设置大鱼旋转角度
     ctx2.rotate(this.angle);
     // 3.4：绘制大鱼

@@ -31,7 +31,7 @@ foodObj.prototype.init = function () {
         this.x[i] = 0;
         this.y[i] = 0;
         this.l[i] = 0;
-        this.aneNo[i]=0;
+        this.aneNo[i] = 0;
         this.foodType[i] = Math.random() < 0.9 ? "blue" : "orange";
         this.spd[i] = Math.random() * 0.017;
     }
@@ -43,7 +43,8 @@ foodObj.prototype.init = function () {
 }
 
 //食物函数调用汇总
-foodObj.prototype.game=function(){
+foodObj.prototype.game = function () {
+    this.die();
     this.foodNum();
     this.draw();
 }
@@ -58,7 +59,7 @@ foodObj.prototype.draw = function () {
             // console.log(pic)
             //4.4~4.6：判断当前食物宽度<=14，修改l,否则，修改y
             if (this.l[i] <= 14) {
-                
+
                 this.l[i] += this.spd[i] * deltaTime;
                 // console.log(this.l[i])
             } else {
@@ -66,26 +67,27 @@ foodObj.prototype.draw = function () {
             };
             //4.7：绘制当前食物
             ctx1.drawImage(pic, this.x[i], this.y[i], this.l[i], this.l[i]);
-            //4.8~4.9:如果当前食物漂出屏幕，将食物状态改为隐藏
-            if(this.y[i]<10 || this.l[i]>14){this.alive[i]=false;}
-        }       
+
+        }
     }
 }
 // 5:将food.js引入到index.html中
 //6:
 // 功能2：监听画布上活动食物是否有15个，不足15个，挑一个食物出来
 // 6.1：创建全局函数，监听画布上食物的数量，不足15个:挑
-foodObj.prototype.foodNum=function () {
+foodObj.prototype.foodNum = function () {
     var count = 0;
     for (var i = 0; i < this.num; i++) {
         if (this.alive[i] == true) {
             count++;
         }
     }
-    if(count<15){this.sendFood();}
+    if(count < 15) {
+        this.sendFood();
+    }
 }
 //6.2：创建全局函数：挑，按下标取第一个
-foodObj.prototype.sendFood=function () {
+foodObj.prototype.sendFood = function () {
     for (var i = 0; i < this.num; i++) {
         if (this.alive[i] == false) {
             this.born(i);
@@ -94,18 +96,31 @@ foodObj.prototype.sendFood=function () {
     }
 }
 //6.3为构造函数添加出生食物方法
-foodObj.prototype.born=function(i){
-    this.aneNo[i]=parseInt(Math.random()*ane.num)
+foodObj.prototype.born = function (i) {
+    this.aneNo[i] = parseInt(Math.random() * ane.num)
     // 将海藻终点坐标赋值给当前食物
-    this.x[i]=ane.headx[this.aneNo[i]];
-    this.y[i]=ane.heady[this.aneNo[i]];
+    this.x[i] = ane.headx[this.aneNo[i]];
+    this.y[i] = ane.heady[this.aneNo[i]];
     // 修改当前食物状态 true
-    this.alive[i]=true;
+    this.alive[i] = true;
     // 修改当前食物宽度0
-    this.l[i]=0;
+    this.l[i] = 0;
     // 修改当前食物类型
-    this.foodType[i]=Math.random() < 0.9 ? "blue" : "orange";
+    this.foodType[i] = Math.random() < 0.9 ? "blue" : "orange";
     // 修改当前食物速度
-    this.spd[i]=Math.random() * 0.017;
+    this.spd[i] = Math.random() * 0.017;
 }
 //6.4:在main.js  gameloop中调用监听画布全局函数
+
+//7:如果当前食物漂出屏幕，尺寸不正常了，将食物状态改为隐藏
+foodObj.prototype.die = function () {
+    for (var i = 0; i < this.num; i++) {
+        if (this.y[i] < 10 || this.l>15) {
+            this.alive[i] = false;
+        }
+        // 被大鱼吃掉了，在此执行有延迟，出无限加分BUG
+        // if (eatFoodIndex >= 0) {
+        //     this.alive[eatFoodIndex] = false;
+        // }
+    }
+}

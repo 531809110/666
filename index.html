@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 800px;
+            height: 600px;
+            margin: 0 auto;
+            border: 1px solid #f00;
+        }
+
+        .allcanvas {
+            width: 800px;
+            height: 600px;
+            position: relative;
+            margin:0;
+            /* border: 2px solid #ff0; */
+        }
+
+        #canvas1 {
+            z-index: 0;
+            width: 800px;
+            height: 600px;
+            position: absolute;
+            left:0;
+            top:0;
+            background-color: antiquewhite
+        }
+
+        #canvas2 {
+            z-index: 1;
+            width: 800px;
+            height: 600px;
+            position: absolute;
+            left:0;
+            top:0;
+            /* background-color:beige */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="allcanvas">
+            <!-- //canvas1：背景、海藻、食物 -->
+            <canvas id="canvas1" width="800" height="600"></canvas>
+            <!-- //canvas2：大鱼，小鱼、分数 -->
+            <canvas id="canvas2" width="800" height="600"></canvas>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/ane.js"></script>
+    <script src="js/food.js"></script>
+    <script>
+
+
+    </script>
+</body>
+
+</html>

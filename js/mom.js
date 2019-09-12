@@ -33,6 +33,7 @@ momObj.prototype.init = function () {
     // 2.1:初始化x,y在画布中心
     this.x = canWidth * 0.5;
     this.y = canHeight * 0.5;
+    
     // 2.2:初始化流动角度0
     this.angle = 0;
     // 2.3:创建二个图片对象保存大鱼眼睛数组，并且下载图片

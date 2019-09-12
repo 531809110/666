@@ -30,6 +30,8 @@ var my=0;
 var data;
 // 1.11:创建全局变量，显示光环
 var wave;
+// 1.12:创建全局变量，保存小鱼对象
+var baby;
 
 // 2：创建函数game
 function game() {
@@ -73,6 +75,9 @@ function init() {
      // 3.13:创建光环对象，初始化光环
      wave=new waveObj();
      wave.init();
+     // 3.14:创建小鱼对象，初始化小鱼
+     baby=new babyObj();
+     baby.init();
 };
 // 4.创建函数gameloop
 function gameloop() {
@@ -98,6 +103,9 @@ function gameloop() {
      data.draw();
      //4.11:显示光环
      wave.draw();
+     //4.12:绘制小鱼
+     baby.draw();
+
 };
 // 5:网页加载成功后调用game
 document.body.onload = game;
